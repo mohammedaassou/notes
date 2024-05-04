@@ -15,7 +15,7 @@ function ModelSheet({item}) {
     
     deleteNote(item.idDB);
 
-    console.log(item.idDB)
+    console.log(item.idDB);
 
     NotesList.shift(item);
 

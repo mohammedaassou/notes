@@ -16,11 +16,10 @@ function NoteContent({item}) {
   const [description, setdesciption] = useState(item.description)
 
   
-  const {setopenAddModel , setopenNote} = useStateContext();
+  const {setopenNote , setmodelSheet} = useStateContext();
   
 
   const _onsave = ()=>{
-    console.log("test" + isNaN(+"122D"));
 
    const isValid =  isNaN(Number.parseInt(title)) && (title.length > 0)
     if(!isValid)
@@ -28,13 +27,12 @@ function NoteContent({item}) {
 
     const index = notes.indexOf(item)
     
-    notes[index].title = title
-    notes[index].description = description
+    notes[index].title = title;
+    notes[index].description = description;
 
     setopenNote(false)
-    
+    setmodelSheet(false)
 
-    console.log("Im here")
    }
 
   return (

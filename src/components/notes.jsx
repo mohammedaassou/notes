@@ -47,7 +47,7 @@ function Notes() {
    
  
   return ( 
-    <div className='container mt-10 px-2  '>
+    <div className='container mt-10 px-2'>
       {
         NotesList.map((e , index)=>  
          <div className='relative'  key={index}> 

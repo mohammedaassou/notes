@@ -12,14 +12,13 @@ import NoteContent from './noteContent'
 
 function Home() {
   
-  const {openAddModel , openNote , Item , setNotesList} = useStateContext();
+  const {openAddModel , openNote , Item , setNotesList , NotesList , isGet} = useStateContext();
   
   useEffect(()=>{
     get(setNotesList);
+    
 
-    // console.log(NotesList + "from notes")
-   
-  }, [])
+  }, [NotesList , isGet])
   
   console.log(openAddModel);
  

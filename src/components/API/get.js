@@ -15,8 +15,9 @@ const get = async (setNotesList) => {
     try {
 
       const data = await getDocs(moviesCollectionRef);
-      const filteredData = data.docs.map((doc) => ({
+      const filteredData = data.docs.map((doc , index) => ({
         ...doc.data(),
+        id : index,
         idDB : doc.id
       }));
     

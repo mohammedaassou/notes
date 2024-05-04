@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import data from '../data/data'
 import { useStateContext } from './context/context';
@@ -6,6 +6,7 @@ import { NoteModel } from './model/note';
 
 
 import post from './API/post'
+import { get } from 'firebase/database';
 
 
 var {notes} = data;
@@ -17,7 +18,7 @@ function Add() {
   const [desciption, setdesciption] = useState("")
 
   
-  const {setopenAddModel , NotesList} = useStateContext();
+  const {setopenAddModel , NotesList , setNotesList , setisGet} = useStateContext();
   
 
   const _onsave = ()=>{
@@ -33,11 +34,10 @@ function Add() {
 
     NotesList.push(newNote);
 
-
     setopenAddModel(false)
-   
-
-
+    
+    setisGet(prev=> !prev);
+    
    }
 
   return (
