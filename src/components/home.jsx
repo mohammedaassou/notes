@@ -1,9 +1,10 @@
-import React  from 'react'
+import React, { useEffect }  from 'react'
 
 import NavBar from './navBar'
 import Notes from './notes'
 import { useStateContext } from './context/context'
 import Add from './add'
+import get from './API/get';
 
 import NoteContent from './noteContent'
 
@@ -11,7 +12,14 @@ import NoteContent from './noteContent'
 
 function Home() {
   
-  const {openAddModel , openNote , Item} = useStateContext();
+  const {openAddModel , openNote , Item , setNotesList} = useStateContext();
+  
+  useEffect(()=>{
+    get(setNotesList);
+
+    // console.log(NotesList + "from notes")
+   
+  }, [])
   
   console.log(openAddModel);
  

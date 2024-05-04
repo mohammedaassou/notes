@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 
 import data from '../data/data'
 import { useStateContext } from './context/context';
-import x, { NoteModel } from './model/note';
+import { NoteModel } from './model/note';
+
+
+import post from './API/post'
 
 
 var {notes} = data;
-
 
 
 function Add() {
@@ -15,7 +17,7 @@ function Add() {
   const [desciption, setdesciption] = useState("")
 
   
-  const {setopenAddModel} = useStateContext();
+  const {setopenAddModel , NotesList} = useStateContext();
   
 
   const _onsave = ()=>{
@@ -24,12 +26,18 @@ function Add() {
    const isValid =  isNaN(Number.parseInt(title)) && (title.length > 0)
     if(!isValid)
     return;
-
+    
     var newNote = new NoteModel(title , desciption);
-    notes.push(newNote);
+
+    post(newNote);
+
+    NotesList.push(newNote);
 
 
     setopenAddModel(false)
+   
+
+
    }
 
   return (

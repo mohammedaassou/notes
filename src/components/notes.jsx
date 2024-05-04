@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import data from  '../data/data'
 
@@ -11,9 +11,11 @@ const {notes} = data;
 
 
 function Note({item}){
-  const {setopenNote , setopenAddModel ,openNote , setItem , modelSheet , setmodelSheet} = useStateContext();
+  const {setopenNote , setopenAddModel ,openNote , setItem , modelSheet , setmodelSheet , setclickedId , setNotesList , NotesList} = useStateContext();
 
-  const [clickedElementId, setclickedElement] = useState(-1)
+   
+  // get data
+
 
   return  <div className='bg-main  my-2 px-5  text-white text-sm rounded-xl flex justify-between items-center relative' >
   <h1 className='flex-1 h-full cursor-pointer py-5 pr-0' onClick={()=>{
@@ -23,25 +25,15 @@ function Note({item}){
   }  }> {item.title}</h1>
 
 
-   <div className='font-extrabold text-xl hover:text-gray-200 w-10 text-right flex items-center justify-center bg-black cursor-pointer' data-id={item.id}
+   <div className='font-extrabold text-xl hover:text-gray-200 w-10 text-right flex items-center justify-center  cursor-pointer' 
     onClick={(e)=>{
-      const id = e.target.getAttribute( 'data-id');
-      setclickedElement(prev=> prev===id ? -1 : id); // Toggle clicked element
-
-      console.log("clicked ele" + clickedElementId);
-      // Ensure state update is finished before logging
-      setTimeout(() => console.log("State updated: " + clickedElementId), 0);
-
+      const ele = e.target.id;
+      setclickedId(+ele);
+      
       setmodelSheet(prev => !prev);
 
-      console.log(e.target)
-
   } } 
-    ><span  data-id={item.id}>...</span>
-     
-   {
-    +(clickedElementId) == item.id && modelSheet  && <ModelSheet item = {item}/> 
-   }
+    ><span id={item.id}>...</span>
 
    </div>
     
@@ -51,13 +43,20 @@ function Note({item}){
 
 
 function Notes() {
-  const {modelSheet} = useStateContext();
+  const {modelSheet , clickedId , NotesList} = useStateContext();
+   
  
-  return (
-    <div className='container mt-10 relative'>
+  return ( 
+    <div className='container mt-10 px-2 sm:p-0 '>
       {
-        notes.map((e , index)=>  
-         <Note item = {e} key={index} />
+        NotesList.map((e , index)=>  
+         <div className='relative'  key={index}> 
+          <Note item = {e}  />
+          {
+          
+          modelSheet && e.id == clickedId && <ModelSheet item={e} />
+          }
+         </div>
         )
       }
     </div>
