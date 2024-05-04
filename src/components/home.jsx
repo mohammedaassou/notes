@@ -25,7 +25,7 @@ function Home() {
  
   console.log("####"+openAddModel || openNote)
   return (
-    <div>
+    <div >
      <div className='flex flex-col items-center bg-main'>
       <NavBar/>
       </div>

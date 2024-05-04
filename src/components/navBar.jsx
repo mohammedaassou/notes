@@ -7,7 +7,7 @@ function NavBar() {
   const {setopenAddModel , setopenNote} = useStateContext()
 
   return (
-    <div className='w-full container py-5 px-2 sm:px-0'>
+    <div className='w-full container py-5 px-2'>
       <div className="flex justify-between">
          <h1 className='text-white font-semibold text-xl uppercase'>Notes</h1>
          <FiPlus color='white' size={30} className='cursor-pointer' onClick={()=>{ 
