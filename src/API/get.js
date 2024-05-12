@@ -1,32 +1,27 @@
-import {
-    getDocs,
-    collection,
-  } from "firebase/firestore";
-
-
+import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 import { db } from "./firebase";
 
-const moviesCollectionRef = collection(db, "notes");
-
+const notesCollectionRef = collection(db, "notes");
 
 const get = async (setNotesList) => {
-
-
-    try {
-
-      const data = await getDocs(moviesCollectionRef);
-      const filteredData = data.docs.map((doc , index) => ({
+  try {
+    const q = query(notesCollectionRef, orderBy("timestamp", "asc")); // Order by timestamp in ascending order
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const notesList = snapshot.docs.map((doc, index) => ({
         ...doc.data(),
-        id : index,
-        idDB : doc.id
+        idFirebase: doc.id,
+        id: index
       }));
-    
-      console.log(filteredData);
+      setNotesList(notesList);
+    });
 
-      setNotesList(filteredData);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    console.log("Subscribed to Firestore changes.");
 
-export default get
+    // Return unsubscribe function if you want to stop listening to changes later
+    return unsubscribe;
+  } catch (error) {
+    console.error("Error fetching notes: ", error);
+  }
+};
+
+export default get;

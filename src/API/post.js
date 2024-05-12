@@ -2,24 +2,26 @@ import 'firebase/firestore';
 import { db } from './firebase';
 import {
   collection,
-  addDoc,
+  addDoc,serverTimestamp 
 } from "firebase/firestore";
 
-const moviesCollectionRef = collection(db, "notes");
+const notesCollectionRef = collection(db, "notes");
 
  const post = async (inputValue) => {
 
     try {
-      await addDoc(moviesCollectionRef, {
+    var res = await addDoc(notesCollectionRef, {
         title: inputValue.title,
         description: inputValue.description,
-        id : inputValue.id
+        timestamp: serverTimestamp(),
       });
 
-      console.log("Added");
+     
+
     } catch (err) {
       console.error(err);
     }
+   
   };
 
 

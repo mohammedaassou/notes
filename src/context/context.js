@@ -12,7 +12,8 @@ export const ContextProvider = ({children})=>{
     const [modelSheet, setmodelSheet] = useState((openNote || openAddModel))
     const [clickedId, setclickedId] = useState(null)
     const [NotesList, setNotesList] = useState([]);
-    const [isGet, setisGet] = useState(false);
+    const [model, setmodel] = useState(false);
+
   
     return (
         <StateContext.Provider value={{
@@ -28,8 +29,9 @@ export const ContextProvider = ({children})=>{
             setclickedId : setclickedId,
             NotesList : NotesList,
             setNotesList: setNotesList,
-            isGet : isGet,
-            setisGet  : setisGet
+            model : model,
+            setmodel : setmodel
+            
 
         }}>
                 {children}

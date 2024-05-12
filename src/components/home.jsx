@@ -1,28 +1,21 @@
 import React, { useEffect }  from 'react'
-
 import NavBar from './navBar'
 import Notes from './notes'
-import { useStateContext } from './context/context'
+import { useStateContext } from '../context/context'
 import Add from './add'
-import get from './API/get';
-
+import get from '../API/get';
 import NoteContent from './noteContent'
-
-// import Note from './noteContent';
 
 function Home() {
   
-  const {openAddModel , openNote , Item , setNotesList , NotesList , isGet} = useStateContext();
+  const {openAddModel , openNote , Item , setNotesList  } = useStateContext();
   
   useEffect(()=>{
-    get(setNotesList);
-    
-
-  }, [NotesList , isGet])
+     get(setNotesList);
+   return;
+  },[setNotesList])
   
-  console.log(openAddModel);
  
-  console.log("####"+openAddModel || openNote)
   return (
     <div >
      <div className='flex flex-col items-center bg-main'>
@@ -32,9 +25,6 @@ function Home() {
       <div className='flex justify-center'>
      {
      !( openAddModel || openNote) && <Notes/>
-      
-      
-      //  openNote => Note
       
        
      } 

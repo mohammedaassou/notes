@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-import data from  '../data/data'
 
-import { useStateContext } from './context/context'
+import { useStateContext } from '../context/context'
 import ModelSheet from './components/modelSheet';
 
 
-const {notes} = data;
 
 
 
 function Note({item}){
-  const {setopenNote , setopenAddModel ,openNote , setItem , modelSheet , setmodelSheet , setclickedId , setNotesList , NotesList} = useStateContext();
+  const {setopenNote , setopenAddModel , setItem   , setmodelSheet , setclickedId } = useStateContext();
 
    
   // get data
@@ -54,7 +52,7 @@ function Notes() {
           <Note item = {e}  />
           {
           
-          modelSheet && e.id == clickedId && <ModelSheet item={e} />
+          modelSheet && e.id === clickedId && <ModelSheet item={e} />
           }
          </div>
         )
