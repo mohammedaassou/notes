@@ -16,14 +16,12 @@ function NoteContent({item}) {
 
   const _onEdit = ()=>{
    
-   const isValid =   (title.length > 0) && title === item.title && description === item.description
-    if(!isValid){
-      return;
-    }else{
-       update(item.idFirebase , { title , description});
-       setopenNote(false)
-       setmodelSheet(false)
-      }
+   const isValid =   (title.length > 0) && !(title === item.title && description === item.description)
+    if(isValid){
+      update(item.idFirebase , { title , description});
+      setmodelSheet(false)
+    }
+
     setopenNote(false)
 
    }
@@ -31,7 +29,6 @@ function NoteContent({item}) {
    function handleKeyDown(event) {
     if (event.key === "Enter" && openNote) {
       _onEdit()
-      console.log("Onedit")
     }
   }
   
@@ -65,7 +62,7 @@ function NoteContent({item}) {
        <div className='flex justify-end '>
         <button className=' px-2 py-1 text-gray-700 font-semibold  ' 
         onClick={()=> setopenNote(false)}>Cancel</button>
-        <button type='submit' 
+        <button 
         className='bg-main px-4 py-1 text-white font-semibold rounded-md' 
         onClick={()=> _onEdit()} >Edit</button>
        </div>
